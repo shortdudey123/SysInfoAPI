@@ -38,7 +38,7 @@ class pythonInfo(restful.Resource):
         return jsonify(pythonData)
 
 class pythonInfoReq(restful.Resource):
-    def get(self, sysReq):
+    def get(self, pythonInfo):
         pythonData = createPythonDict()
         return jsonify({pythonInfo:pythonData[pythonInfo]})
 
