@@ -24,10 +24,10 @@
     {% for item in sysData.keys() %}
       <tr>
         <td>
-          {{ item }}
+          <a href='{{ url_for('sysDataReq', sysReq=item) }}'>{{ item }}</a>
         </td>
         <td>
-         {{ sysData[item] }}
+          {{ sysData[item] }}
         </td>
     {% endfor %}
   </tr>
