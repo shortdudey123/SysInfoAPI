@@ -15,6 +15,7 @@ from flask import Flask, render_template, abort, redirect, url_for, request, jso
 from flask.ext import restful
 
 import sys
+import platform
 
 app = Flask(__name__)
 api = restful.Api(app)
@@ -36,8 +37,24 @@ def index():
 
 def createSysDict():
     ret = {}
-    ret['Path'] = sys.path
     ret['Platform'] = sys.platform
+    ret['Arch'] = platform.architecture()
+    ret['MachineType'] = platform.machine()
+    ret['Name'] = platform.node()
+    ret['Processor'] = platform.processor()
+    ret['System'] = platform.system()
+    ret['Release'] = platform.release()
+    ret['Copyright'] = sys.copyright
+    ret['Path'] = sys.path
+    ret['Version'] = sys.version
+    ret['Uname'] = platform.uname()
+
+    # OS specific info
+    if platform.system() == 'Linux':
+        ret['Dist'] = platform.linux_distribution()
+    elif platform.system() == 'Windows':
+        ret['WinVer'] = sys.getwindowsversion()
+
     return ret
 
 api.add_resource(sysInfo, '/api/1/sysInfo')
