@@ -22,12 +22,12 @@ api = restful.Api(app)
 class sysInfo(restful.Resource):
     def get(self):
         sysData = createSysDict()
-        return sysData
+        return jsonify(sysData)
 
 class sysInfoReq(restful.Resource):
     def get(self, sysReq):
         sysData = createSysDict()
-        return sysData[sysReq]
+        return jsonify({sysReq:sysData[sysReq]})
 
 @app.route('/')
 def index():
