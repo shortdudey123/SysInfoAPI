@@ -32,9 +32,20 @@ class sysInfoReq(restful.Resource):
         sysData = createSysDict()
         return jsonify({sysReq:sysData[sysReq]})
 
+class pythonInfo(restful.Resource):
+    def get(self):
+        pythonData = createPythonDict()
+        return jsonify(pythonData)
+
+class pythonInfoReq(restful.Resource):
+    def get(self, sysReq):
+        pythonData = createPythonDict()
+        return jsonify({pythonInfo:pythonData[pythonInfo]})
+
 @app.route('/')
 def index():
     sysData = createSysDict()
+    pythonData = createPythonDict()
     return render_template('index.html', sysData=sysData)
 
 def createSysDict():
@@ -46,9 +57,6 @@ def createSysDict():
     ret['Processor'] = platform.processor()
     ret['System'] = platform.system()
     ret['Release'] = platform.release()
-    ret['Copyright'] = sys.copyright
-    ret['Path'] = sys.path
-    ret['Version'] = sys.version
     ret['Uname'] = platform.uname()
 
     # OS specific info
@@ -63,8 +71,19 @@ def createSysDict():
 
     return ret
 
-api.add_resource(sysInfo, '/api/1/sysInfo')
-api.add_resource(sysInfoReq, '/api/1/sysInfo/<string:sysReq>')
+
+def createPythonDict():
+    ret = {}
+    ret['Copyright'] = sys.copyright
+    ret['Path'] = sys.path
+    ret['Version'] = sys.version
+
+    return ret
+
+api.add_resource(sysInfo, '/api/1/SysInfo')
+api.add_resource(sysInfoReq, '/api/1/SysInfo/<string:sysReq>')
+api.add_resource(sysInfo, '/api/1/PythonInfo')
+api.add_resource(sysInfoReq, '/api/1/PythonInfo/<string:pythonInfo>')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

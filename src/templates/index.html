@@ -24,7 +24,32 @@
     {% for item in sysData.keys() %}
       <tr>
         <td>
-          <a href='{{ '/api/1/sysInfo/{0}'.format(item) }}'>{{ item }}</a>
+          <a href='{{ '/api/1/SysInfo/{0}'.format(item) }}'>{{ item }}</a>
+        </td>
+        <td>
+          {{ sysData[item] }}
+        </td>
+    {% endfor %}
+  </tr>
+</table>
+
+<h1>PythonInfo</h1>
+
+<table>
+  <tr>
+    <b>
+      <td>
+        <h2>Name</h2>
+      </td>
+      <td>
+        <h2>Data</h2>
+      </td>
+    </b>
+  </tr>
+    {% for item in pythonData.keys() %}
+      <tr>
+        <td>
+          <a href='{{ '/api/1/PythonInfo/{0}'.format(item) }}'>{{ item }}</a>
         </td>
         <td>
           {{ sysData[item] }}
