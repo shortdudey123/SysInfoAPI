@@ -23,18 +23,24 @@ class sysInfo(restful.Resource):
     def get(self):
         return {'hello': 'world'}
 
+class sysInfoReq(restful.Resource):
+    def get(self):
+        sysData = createSysDict()
+        return sysData[sysReq]
+
 @app.route('/')
 def index():
-    sysData = createInfoDict()
+    sysData = createSysDict()
     return render_template('index.html', sysData=sysData)
 
-def createInfoDict():
+def createSysDict():
     ret = {}
-    ret['Platform'] = sys.platform
     ret['Path'] = sys.path
+    ret['Platform'] = sys.platform
     return ret
 
 api.add_resource(sysInfo, '/api/1/sysInfo')
+api.add_resource(sysInfoReq, '/api/1/sysInfo/<string:sysReq>')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
