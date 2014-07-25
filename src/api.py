@@ -26,7 +26,7 @@ class sysInfo(restful.Resource):
 @app.route('/')
 def index():
     sysData = createInfoDict()
-    return render_template('show_entries.html', sysData=sysData)
+    return render_template('index.html', sysData=sysData)
 
 def createInfoDict():
     ret = {}
