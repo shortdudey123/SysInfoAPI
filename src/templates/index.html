@@ -1,0 +1,23 @@
+<!doctype html>
+<title>SysInfo</title>
+<h1>SysInfo</h1>
+<table>
+  <tr>
+    <td>
+      Name
+    </td>
+    <td>
+      Data
+    </td>
+  </tr>
+    {% for item in sysData.keys() %}
+      <tr>
+        <td>
+          {{ item }}
+        </td>
+        <td>
+         {{ sysData[item] }}
+        </td>
+    {% endfor %}
+  </tr>
+</table>
