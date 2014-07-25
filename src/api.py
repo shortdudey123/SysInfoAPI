@@ -25,7 +25,7 @@ class sysInfo(restful.Resource):
         return sysData
 
 class sysInfoReq(restful.Resource):
-    def get(self):
+    def get(self, sysReq):
         sysData = createSysDict()
         return sysData[sysReq]
 
