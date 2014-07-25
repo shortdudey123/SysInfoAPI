@@ -24,7 +24,7 @@
     {% for item in sysData.keys() %}
       <tr>
         <td>
-          <a href='{{ url_for('sysDataReq', sysReq=item) }}'>{{ item }}</a>
+          <a href='{{ '/api/1/sysInfo/{0}'.format(item) }}'>{{ item }}</a>
         </td>
         <td>
           {{ sysData[item] }}
