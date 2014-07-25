@@ -21,7 +21,8 @@ api = restful.Api(app)
 
 class sysInfo(restful.Resource):
     def get(self):
-        return {'hello': 'world'}
+        sysData = createSysDict()
+        return sysData
 
 class sysInfoReq(restful.Resource):
     def get(self):
