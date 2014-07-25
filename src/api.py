@@ -16,6 +16,7 @@ from flask.ext import restful
 
 import sys
 import platform
+import time
 
 app = Flask(__name__)
 api = restful.Api(app)
@@ -48,6 +49,7 @@ def createSysDict():
     ret['Path'] = sys.path
     ret['Version'] = sys.version
     ret['Uname'] = platform.uname()
+    ret['Time'] = time.time()
 
     # OS specific info
     if platform.system() == 'Linux':
