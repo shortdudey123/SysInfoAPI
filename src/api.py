@@ -25,14 +25,14 @@ class sysInfo(restful.Resource):
 
 @app.route('/')
 def index():
-	sysData = createInfoDict()
+    sysData = createInfoDict()
     return render_template('show_entries.html', sysData=sysData)
 
 def createInfoDict():
-	ret = {}
-	ret['Platform'] = sys.platform
-	ret['Path'] = sys.path
-	return ret
+    ret = {}
+    ret['Platform'] = sys.platform
+    ret['Path'] = sys.path
+    return ret
 
 api.add_resource(sysInfo, '/api/1/sysInfo')
 
