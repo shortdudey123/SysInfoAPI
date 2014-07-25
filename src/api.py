@@ -46,7 +46,7 @@ class pythonInfoReq(restful.Resource):
 def index():
     sysData = createSysDict()
     pythonData = createPythonDict()
-    return render_template('index.html', sysData=sysData)
+    return render_template('index.html', sysData=sysData, pythonData=pythonData)
 
 def createSysDict():
     ret = {}
