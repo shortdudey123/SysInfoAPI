@@ -29,8 +29,9 @@ def getFilesystemData():
 
         for line in rawDataLines:
             line = re.sub(' +', ' ', line)
-            for i,l in enumerate(line.split(' ')):
-                retData[i].append(l)
+            if re.sub(' ', '', line) != '':
+                for i,l in enumerate(line.split(' ')):
+                    retData[i].append(l)
     return retData
 
 if __name__ == '__main__':
