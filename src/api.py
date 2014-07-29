@@ -48,6 +48,18 @@ def index():
     pythonData = createPythonDict()
     return render_template('index.html', sysData=sysData, pythonData=pythonData)
 
+# based on http://blog.luisrei.com/articles/flaskrest.html
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {
+            'status': 404,
+            'message': 'Not Found: ' + request.url,
+    }
+    response = jsonify(message)
+    response.status_code = 404
+
+    return response
+
 def createSysDict():
     ret = {}
     ret['Platform'] = sys.platform
