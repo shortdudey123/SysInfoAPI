@@ -74,7 +74,7 @@
     {% for item in filesysData.keys() %}
       <tr>
         <td>
-          <a href='{{ '/api/1/FilesystemInfo/{0}'.format(item) }}'>{{ item }}</a>
+          <a href='{{ '/api/1/FilesystemInfo/{0}'.format(filesysDataLink[item]) }}'>{{ item }}</a>
         </td>
         <td>
           {{ filesysData[item] }}

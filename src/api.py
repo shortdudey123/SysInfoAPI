@@ -70,7 +70,13 @@ def index():
     sysData = createSysDict()
     pythonData = createPythonDict()
     filesysData = getFilesystemData()
-    return render_template('index.html', sysData=sysData, pythonData=pythonData, filesysData=filesysData)
+
+    # remove / and replace with _ for api link
+    filesysDataLink = {}
+    for key in filesysData.keys():
+        filesysDataLink[key] = re.sub('/', '_', filesysData)
+
+    return render_template('index.html', sysData=sysData, pythonData=pythonData, filesysData=filesysData, filesysDataLink=filesysDataLink)
 
 # based on http://blog.luisrei.com/articles/flaskrest.html
 @app.errorhandler(404)
