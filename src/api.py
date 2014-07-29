@@ -44,7 +44,7 @@ class pythonInfoReq(restful.Resource):
     def get(self, pythonReq):
         pythonData = createPythonDict()
         if pythonReq in pythonData.keys():
-            return jsonify({pythonReq:sysData[pythonReq]})
+            return jsonify({pythonReq:pythonData[pythonReq]})
         else:
             return not_found()
 
