@@ -74,7 +74,7 @@ def index():
     # remove / and replace with _ for api link
     filesysDataLink = {}
     for key in filesysData.keys():
-        filesysDataLink[key] = re.sub('/', '_', filesysData)
+        filesysDataLink[key] = re.sub('/', '_', key)
 
     return render_template('index.html', sysData=sysData, pythonData=pythonData, filesysData=filesysData, filesysDataLink=filesysDataLink)
 
