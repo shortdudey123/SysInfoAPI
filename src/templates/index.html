@@ -57,3 +57,28 @@
     {% endfor %}
   </tr>
 </table>
+
+<h1>FilesystemInfo</h1>
+
+<table>
+  <tr>
+    <b>
+      <td>
+        <h2>Name</h2>
+      </td>
+      <td>
+        <h2>Data</h2>
+      </td>
+    </b>
+  </tr>
+    {% for item in filesysData.keys() %}
+      <tr>
+        <td>
+          <a href='{{ '/api/1/FilesystemInfo/{0}'.format(item) }}'>{{ item }}</a>
+        </td>
+        <td>
+          {{ filesysData[item] }}
+        </td>
+    {% endfor %}
+  </tr>
+</table>

@@ -69,7 +69,8 @@ class filesysInfoReq(restful.Resource):
 def index():
     sysData = createSysDict()
     pythonData = createPythonDict()
-    return render_template('index.html', sysData=sysData, pythonData=pythonData)
+    filesysData = getFilesystemData()
+    return render_template('index.html', sysData=sysData, pythonData=pythonData, filesysData=filesysData)
 
 # based on http://blog.luisrei.com/articles/flaskrest.html
 @app.errorhandler(404)
