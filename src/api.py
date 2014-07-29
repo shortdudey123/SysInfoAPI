@@ -30,9 +30,9 @@ class sysInfo(restful.Resource):
 class sysInfoReq(restful.Resource):
     def get(self, sysReq):
         sysData = createSysDict()
-        if sysReq in sysData.keys()
+        if sysReq in sysData.keys():
             return jsonify({sysReq:sysData[sysReq]})
-        else
+        else:
             return not_found()
 
 class pythonInfo(restful.Resource):
@@ -41,11 +41,11 @@ class pythonInfo(restful.Resource):
         return jsonify(pythonData)
 
 class pythonInfoReq(restful.Resource):
-    def get(self, pythonInfo):
+    def get(self, pythonReq):
         pythonData = createPythonDict()
-        if pythonInfo in pythonData.keys()
-            return jsonify({pythonInfo:sysData[pythonInfo]})
-        else
+        if pythonReq in pythonData.keys():
+            return jsonify({pythonReq:sysData[pythonReq]})
+        else:
             return not_found()
 
 @app.route('/')
