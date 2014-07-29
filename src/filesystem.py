@@ -22,8 +22,8 @@ def getFilesystemData():
     if sys == 'Linux':
         proc = subprocess.Popen(['df'], stdout=subprocess.PIPE)
         rawData = proc.communicate()
-        rawData = rawData.replace('Mounted on', 'Mounted_on')
-        rawDataLines = rawData[0].split('\n')
+        rawData = rawData[0].replace('Mounted on', 'Mounted_on')
+        rawDataLines = rawData.split('\n')
 
         for line in rawDataLines:
             line = re.sub(' +', ' ', line)
