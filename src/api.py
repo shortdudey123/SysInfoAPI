@@ -101,7 +101,7 @@ def createPythonDict():
 api.add_resource(sysInfo, '/api/1/SysInfo')
 api.add_resource(sysInfoReq, '/api/1/SysInfo/<string:sysReq>')
 api.add_resource(pythonInfo, '/api/1/PythonInfo')
-api.add_resource(pythonInfoReq, '/api/1/PythonInfo/<string:pythonInfo>')
+api.add_resource(pythonInfoReq, '/api/1/PythonInfo/<string:pythonReq>')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
