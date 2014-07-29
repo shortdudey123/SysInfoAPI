@@ -23,8 +23,7 @@ def getFilesystemData():
         proc = subprocess.Popen(['df'], stdout=subprocess.PIPE)
         rawData = proc.communicate()
         rawData = rawData[0].replace('Mounted on', 'Mounted_on')
-        rawDataLines.rstrip('\n')
-        rawDataLines = rawData.split('\n')
+        rawDataLines = rawData.rstrip('\n').split('\n')
 
         # remove the header
         del rawDataLines[0]
