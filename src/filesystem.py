@@ -16,22 +16,30 @@ import platform
 import re
 
 def getFilesystemData():
-    retData = []
+    retData = {}
     sys = platform.system()
 
     if sys == 'Linux':
         proc = subprocess.Popen(['df'], stdout=subprocess.PIPE)
         rawData = proc.communicate()
         rawData = rawData[0].replace('Mounted on', 'Mounted_on')
+        rawDataLines.rstrip('\n')
         rawDataLines = rawData.split('\n')
 
-        retData = [list() for i in range(len(rawDataLines))]
+        # remove the header
+        del rawDataLines[0]
 
         for line in rawDataLines:
             line = re.sub(' +', ' ', line)
-            if re.sub(' ', '', line) != '':
-                for i,l in enumerate(line.split(' ')):
-                    retData[i].append(l)
+            line = line.split(' ')
+
+            retData[line[5]] = {'Filesystem': line[0],
+                                '1K-blocks': line[1],
+                                'Used': line[2],
+                                'Available': line[3],
+                                'UsePercent': line[4]
+                               }
+
     return retData
 
 if __name__ == '__main__':
