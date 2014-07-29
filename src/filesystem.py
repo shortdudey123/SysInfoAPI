@@ -21,8 +21,7 @@ def getFilesystemData():
     if sys == 'Linux':
         proc = subprocess.Popen(["df"], stdout=subprocess.PIPE)
         rawData = proc.communicate()
-        rawDataLines = rawData.split('\n')
-        print rawDataLines
+        print rawData
     return retData
 
 if __name__ == '__main__':
