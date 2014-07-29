@@ -18,6 +18,7 @@ import sys
 import platform
 import time
 import datetime
+import re
 
 from filesystem import getFilesystemData
 
@@ -54,6 +55,15 @@ class filesysInfo(restful.Resource):
     def get(self):
         filesysData = getFilesystemData()
         return jsonify(filesysData)
+
+class filesysInfoReq(restful.Resource):
+    def get(self, filesysReq):
+        filesysData = getFilesystemData()
+        filesysReqPath = re.sub('_', '/', filesysData)
+        if filesysReqPath in filesysData.keys():
+            return jsonify({filesysReqPath:filesysReqPath[filesysReqPath]})
+        else:
+            return not_found()
 
 @app.route('/')
 def index():
@@ -110,6 +120,7 @@ api.add_resource(sysInfoReq, '/api/1/SysInfo/<string:sysReq>')
 api.add_resource(pythonInfo, '/api/1/PythonInfo')
 api.add_resource(pythonInfoReq, '/api/1/PythonInfo/<string:pythonReq>')
 api.add_resource(filesysInfo, '/api/1/FilesystemInfo')
+api.add_resource(filesysInfoReq, '/api/1/FilesystemInfo/<string:filesysReq>')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
