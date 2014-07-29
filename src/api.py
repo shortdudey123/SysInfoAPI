@@ -19,7 +19,7 @@ import platform
 import time
 import datetime
 
-import filesystem
+from filesystem import getFilesystemData
 
 app = Flask(__name__)
 api = restful.Api(app)
