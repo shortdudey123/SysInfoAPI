@@ -25,6 +25,8 @@ def getFilesystemData():
         rawData = rawData[0].replace('Mounted on', 'Mounted_on')
         rawDataLines = rawData.split('\n')
 
+        retData = [list() for i in range(len(rawDataLines))]
+
         for line in rawDataLines:
             line = re.sub(' +', ' ', line)
             for i,l in enumerate(line.split(' ')):
