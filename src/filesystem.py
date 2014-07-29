@@ -42,4 +42,5 @@ def getFilesystemData():
     return retData
 
 if __name__ == '__main__':
-    print getFilesystemData()
+    import pprint
+    pprint.pprint(getFilesystemData())
