@@ -59,7 +59,7 @@ class filesysInfo(restful.Resource):
 class filesysInfoReq(restful.Resource):
     def get(self, filesysReq):
         filesysData = getFilesystemData()
-        filesysReqPath = re.sub('_', '/', filesysData)
+        filesysReqPath = re.sub('_', '/', filesysReq)
         if filesysReqPath in filesysData.keys():
             return jsonify({filesysReqPath:filesysReqPath[filesysReqPath]})
         else:
