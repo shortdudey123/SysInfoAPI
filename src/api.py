@@ -19,6 +19,8 @@ import platform
 import time
 import datetime
 
+import filesystem
+
 app = Flask(__name__)
 api = restful.Api(app)
 
@@ -47,6 +49,11 @@ class pythonInfoReq(restful.Resource):
             return jsonify({pythonReq:pythonData[pythonReq]})
         else:
             return not_found()
+
+class filesysInfo(restful.Resource):
+    def get(self):
+        filesysData = getFilesystemData()
+        return jsonify(filesysData)
 
 @app.route('/')
 def index():
@@ -102,6 +109,7 @@ api.add_resource(sysInfo, '/api/1/SysInfo')
 api.add_resource(sysInfoReq, '/api/1/SysInfo/<string:sysReq>')
 api.add_resource(pythonInfo, '/api/1/PythonInfo')
 api.add_resource(pythonInfoReq, '/api/1/PythonInfo/<string:pythonReq>')
+api.add_resource(filesysInfo, '/api/1/FilesystemInfo')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
