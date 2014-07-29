@@ -61,7 +61,7 @@ class filesysInfoReq(restful.Resource):
         filesysData = getFilesystemData()
         filesysReqPath = re.sub('_', '/', filesysReq)
         if filesysReqPath in filesysData.keys():
-            return jsonify({filesysReqPath:filesysReqPath[filesysReqPath]})
+            return jsonify({filesysReqPath:filesysData[filesysReqPath]})
         else:
             return not_found()
 
