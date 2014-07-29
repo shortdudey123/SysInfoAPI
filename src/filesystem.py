@@ -20,7 +20,7 @@ def getFilesystemData():
 
     if sys == 'Linux':
         proc = subprocess.Popen(["df"], stdout=subprocess.PIPE)
-        rawData = proc.communitcat()
+        rawData = proc.communicate()
         rawDataLines = rawData.split('\n')
         print rawDataLines
     return retData
