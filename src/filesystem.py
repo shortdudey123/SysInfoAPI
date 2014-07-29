@@ -13,17 +13,23 @@
 
 import subprocess
 import platform
+import re
 
 def getFilesystemData():
-    retData = {}
+    retData = []
     sys = platform.system()
 
     if sys == 'Linux':
-        proc = subprocess.Popen(["df"], stdout=subprocess.PIPE)
+        proc = subprocess.Popen(['df'], stdout=subprocess.PIPE)
         rawData = proc.communicate()
+        rawData = rawData.replace('Mounted on', 'Mounted_on')
         rawDataLines = rawData[0].split('\n')
-        print rawDataLines
+
+        for line in rawDataLines:
+            line = re.sub(' +', ' ', line)
+            for i,l in enumerate(line.split(' ')):
+                retData[i].append(l)
     return retData
 
 if __name__ == '__main__':
-    getFilesystemData()
+    print getFilesystemData()
