@@ -106,6 +106,8 @@ def createSysDict():
         ret['Dist'] = platform.linux_distribution()
     elif platform.system() == 'Windows':
         ret['WinVer'] = sys.getwindowsversion()
+    elif platform.system() == 'Darwin':
+        pass
 
     # time info
     ret['Time'] = time.time()
