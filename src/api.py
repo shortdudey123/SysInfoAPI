@@ -107,7 +107,7 @@ def createSysDict():
     elif platform.system() == 'Windows':
         ret['WinVer'] = sys.getwindowsversion()
     elif platform.system() == 'Darwin':
-        pass
+        ret['MacVer'] = platform.mac_ver()
 
     # time info
     ret['Time'] = time.time()
