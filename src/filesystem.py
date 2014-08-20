@@ -49,16 +49,11 @@ def getFilesystemData():
         del rawDataLines[0]
 
         for line in rawDataLines:
-            print line
             line = line.replace('map -hosts', 'map_-hosts')
             line = line.replace('map auto_home', 'map_auto_home')
-            print line
 
             line = re.sub(' +', ' ', line)
             line = line.split(' ')
-
-            import pprint
-            pprint.pprint(line)
 
             retData[line[8]] = {'Filesystem': line[0],
                                 '512-blocks': line[1],
