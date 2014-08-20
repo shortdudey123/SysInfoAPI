@@ -39,6 +39,37 @@ def getFilesystemData():
                                 'UsePercent': line[4]
                                }
 
+    elif sys == 'Darwin':
+        proc = subprocess.Popen(['df'], stdout=subprocess.PIPE)
+        rawData = proc.communicate()
+        rawData = rawData[0].replace('Mounted on', 'Mounted_on')
+        rawDataLines = rawData.rstrip('\n').split('\n')
+
+        # remove the header
+        del rawDataLines[0]
+
+        for line in rawDataLines:
+            print line
+            line = line.replace('map -hosts', 'map_-hosts')
+            line = line.replace('map auto_home', 'map_auto_home')
+            print line
+
+            line = re.sub(' +', ' ', line)
+            line = line.split(' ')
+
+            import pprint
+            pprint.pprint(line)
+
+            retData[line[8]] = {'Filesystem': line[0],
+                                '512-blocks': line[1],
+                                'Used': line[2],
+                                'Available': line[3],
+                                'UsePercent': line[4],
+                                'iused': line[5],
+                                'ifree': line[6],
+                                'iusedPercent': line[7]
+                               }
+
     return retData
 
 if __name__ == '__main__':
