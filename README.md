@@ -20,6 +20,11 @@ Run the server
     
 Go to `http://<hostname>:5000/` in a web broswer to see what is available for your system
 
+Note: you may need to update iptables if it is running (update 127.0.0.1 to your IP or remove it entirely
+)
+
+	sudo iptables -I INPUT 1 -p tcp -s 127.0.0.1 --dport 5000 -j ACCEPT
+
 Testing
 ------------
 
