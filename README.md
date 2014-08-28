@@ -4,9 +4,10 @@ SysInfoAPI
 Installation
 ------------
 
-Install restful extention for Flask (auto installs Flask as well)
+Install restful extention for Flask (auto installs Flask as well) and netifaces
     
     pip install flask-restful
+    pip install netifaces
 
 Run the server
 

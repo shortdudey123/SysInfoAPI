@@ -21,6 +21,7 @@ import datetime
 import re
 
 from filesystem import getFilesystemData
+from network import getNetworkData, getNetworkDataInt, getNetworkDataIntType
 
 app = Flask(__name__)
 api = restful.Api(app)
@@ -65,18 +66,55 @@ class filesysInfoReq(restful.Resource):
         else:
             return not_found()
 
+class networkInfo(restful.Resource):
+    def get(self):
+        networkData = getNetworkData()
+        return jsonify(networkData)
+
+class networkInfoIntReq(restful.Resource):
+    def get(self, networkInt):
+        networkDataInt = getNetworkDataInt(networkInt)
+        if networkDataInt != {}:
+            return jsonify({networkInt:networkDataInt})
+        else:
+            return not_found()
+
+class networkInfoIntExtReq(restful.Resource):
+    def get(self, networkInt, networkType):
+        networkData = getNetworkDataIntType(networkInt, networkType)
+        if networkData != {}:
+            return jsonify({networkType:networkData})
+        else:
+            return not_found()
+
 @app.route('/')
 def index():
     sysData = createSysDict()
     pythonData = createPythonDict()
     filesysData = getFilesystemData()
+    networkData = getNetworkData()
 
     # remove / and replace with _ for api link
     filesysDataLink = {}
     for key in filesysData.keys():
         filesysDataLink[key] = re.sub('/', '_', key)
 
-    return render_template('index.html', sysData=sysData, pythonData=pythonData, filesysData=filesysData, filesysDataLink=filesysDataLink)
+    networkDataInt = {}
+
+    for interface in networkData.keys():
+        networkDataInt[interface] = {}
+        ipv4 = getNetworkDataIntType(interface, 'ipv4')
+        ipv6 = getNetworkDataIntType(interface, 'ipv6')
+        link = getNetworkDataIntType(interface, 'link')
+
+        if ipv4 != {}:
+            networkDataInt[interface]['ipv4'] = ipv4
+        if ipv6 != {}:
+            networkDataInt[interface]['ipv6'] = ipv6
+        if link != {}:
+            networkDataInt[interface]['link'] = link
+
+    return render_template('index.html', sysData=sysData, pythonData=pythonData, filesysData=filesysData, filesysDataLink=filesysDataLink, networkData=networkData, networkDataInt=networkDataInt)
 
 # based on http://blog.luisrei.com/articles/flaskrest.html
 @app.errorhandler(404)
@@ -130,6 +168,9 @@ api.add_resource(pythonInfo, '/api/1/PythonInfo')
 api.add_resource(pythonInfoReq, '/api/1/PythonInfo/<string:pythonReq>')
 api.add_resource(filesysInfo, '/api/1/FilesystemInfo')
 api.add_resource(filesysInfoReq, '/api/1/FilesystemInfo/<string:filesysReq>')
+api.add_resource(networkInfo, '/api/1/NetworkInfo')
+api.add_resource(networkInfoIntReq, '/api/1/NetworkInfo/<string:networkInt>')
+api.add_resource(networkInfoIntExtReq, '/api/1/NetworkInfo/<string:networkInt>/<string:networkType>')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

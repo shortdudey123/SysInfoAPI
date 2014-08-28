@@ -82,3 +82,62 @@
     {% endfor %}
   </tr>
 </table>
+
+
+<h1>NetworkInfo</h1>
+
+<table>
+  <tr>
+    <b>
+      <td>
+        <h2>Name</h2>
+      </td>
+      <td>
+        <h2>Data</h2>
+      </td>
+    </b>
+  </tr>
+    {% for item in networkData.keys() %}
+      <tr>
+        <td>
+          <a href='{{ '/api/1/NetworkInfo/{0}'.format(item) }}'>{{ item }}</a>
+        </td>
+        <td>
+          {{ networkData[item] }}
+        </td>
+    {% endfor %}
+  </tr>
+</table>
+
+<h1>NetworkInfo - extended</h1>
+
+<table>
+  <tr>
+    <b>
+      <td>
+        <h2>Name</h2>
+      </td>
+      <td>
+        <h2>Type</h2>
+      </td>
+      <td>
+        <h2>Data</h2>
+      </td>
+    </b>
+  </tr>
+    {% for interface in networkDataInt.keys() %}
+      {% for interfaceType in networkDataInt[interface] %}
+        <tr>
+          <td>
+            <a href='{{ '/api/1/NetworkInfo/{0}'.format(interface) }}'>{{ interface }}</a>
+          </td>
+          <td>
+            <a href='{{ '/api/1/NetworkInfo/{0}/{1}'.format(interface, interfaceType) }}'>{{ interfaceType }}</a>
+          </td>
+          <td>
+            {{ networkDataInt[interface][interfaceType] }}
+          </td>
+      {% endfor %}
+    {% endfor %}
+  </tr>
+</table>
