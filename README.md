@@ -4,10 +4,15 @@ SysInfoAPI
 Installation
 ------------
 
-Install restful extention for Flask (auto installs Flask as well) and netifaces
+Install virtualenv (if you have not already done so)
+
+    sudo pip install virtualenv
+
+Setup virtualenv and install the needed packages (start in the root dir of the repo)
     
-    pip install flask-restful
-    pip install netifaces
+    virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
 
 Run the server
 
